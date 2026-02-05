@@ -9,7 +9,11 @@ Querying: Embeds user queries, retrieves top-K similar chunks via cosine similar
 
 Features: Incremental updates, fully local, simple metadata mapping, extensible baseline for RAG applications.
 
-### How does it work?
+### How do I use it?
+
+Setup
+
+You need a recent Python version ~3.11+, a local LLM server running or configure to connect to a cloud LLM, and .docx files in a `kb/` folder.
 
 File Ingestion
 
