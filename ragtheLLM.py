@@ -100,7 +100,7 @@ while True:
         "Content-Type": "application/json"
     }
     
-    # Use a minimal conversation structure
+   
     payload = {
         "model": "gemma-3-12b-it-q4_0",  
         "messages": [
