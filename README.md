@@ -3,9 +3,9 @@ This project is meant to explore current and evolving features and use cases of 
 # Local RAG Knowledge Base
 Currently, the project is setup to implement a Retrieval-Augmented Generation (RAG) pipeline to a local LLM server.
 
-Indexing: Scans kb/ folder, parses .docx files with Docling, splits into chunks, embeds with all-MiniLM-L6-v2, normalizes, and stores vectors in a FAISS index. Metadata (source + text) and seen files are saved via pickle and json.
+`runDocling.py`: Scans kb/ folder, parses .docx files with Docling, splits into chunks, embeds with all-MiniLM-L6-v2, normalizes, and stores vectors in a FAISS index. Metadata (source + text) and seen files are saved via pickle and json.
 
-Querying: Embeds user queries, retrieves top-K similar chunks via cosine similarity, builds a RAG-style prompt, and sends it to a local LLM server.
+`ragtheLLM.py`: Embeds user queries, retrieves top-K similar chunks via cosine similarity, builds a RAG-style prompt, and sends it to a local LLM server.
 
 Features: Incremental updates, fully local, simple metadata mapping, extensible baseline for RAG applications.
 
@@ -13,15 +13,17 @@ Features: Incremental updates, fully local, simple metadata mapping, extensible 
 
 Setup
 
-You need a recent Python version ~3.11+, a local LLM server running or configure to connect to a cloud LLM, and .docx files in a `kb/` folder.
+You need a recent Python version ~3.12+, a local LLM server running or configure to connect to a cloud LLM, and .docx files in a `kb/` folder.
 
 File Ingestion
 
- Place `.docx` files in the `kb/` folder and run the `runDocling.py` script. It parses, chunks, embeds, and stores them in a FAISS index with metadata.
+ Place `.docx` files in the `kb/` folder and run the `runDocling.py` script. It parses, chunks, embeds, and stores them in a FAISS index with metadata mapping in a pickle file. 
+ 
+Note: Previously ingested file names are stored to prevent duplicative ingestion. Future enhancement would incorporate file hashing or last modified timestamp comparison to capture changes to already ingested files.
 
 Querying 
 
-Run the `ragtheLLM.py` script to ask questions. It retrieves the most relevant `kb/` document chunks and sends them to a the LLM for RAG-enhanced answers.
+After successfully running `runDocling.py` run `ragtheLLM.py` script to interact with your LLM, ensuring you have the local server already running. It retrieves the most relevant `kb/` document chunks and sends them to a the LLM for RAG-enhanced answers.
 
 ### FAQ
 I don't want to use a local LLM\
